@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ethereal | Home</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -65,6 +66,49 @@
             color: #000;
         }
 
+        .input-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            width: 100%; 
+        }
+
+        .input-container input {
+            padding: 10px;
+            border: 2px solid #1c1c1c;
+            border-radius: 5px 0 0 5px;
+            background-color: #101010;
+            color: #FFF;
+            outline: none;
+            flex: 1; 
+            max-width: 300px; 
+        }
+
+        .input-container button {
+            padding: 10px;
+            border: 2px solid #1c1c1c;
+            border-left: none;
+            border-radius: 0 5px 5px 0;
+            background-color: #1c1c1c;
+            color: #FFF;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+
+        .input-container button:hover {
+            background-color: #FFF;
+            color: #000;
+            border: 2px solid #FFF;
+        }
+
+        .input-container button:active {
+            background-color: #050505;
+            color: #FFF;
+            border: 2px solid #FFF;
+        }
+
         ::-webkit-scrollbar {
             width: 0.4rem;
             height: 0.5rem;
@@ -86,35 +130,67 @@
 </head>
 
 <body>
-    <center>
-        <div class="nav-bar">
-            <div class="nav-left">
-                <h1><i>Ethereal</i></h1>
+    <div id="load-div">
+        <center>
+            <div class="nav-bar">
+                <div class="nav-left">
+                    <h1><i>Ethereal</i></h1>
+                </div>
+                <div class="nav-right">
+                    <button>
+                        Home
+                    </button>
+                    <button onclick="window.location.href = '/games'">
+                        Games
+                    </button>
+                    <button>
+                        Apps
+                    </button>
+                    <button>
+                        Settings
+                    </button>
+                </div>
             </div>
-            <div class="nav-right">
-                <button>
-                    Home
-                </button>
-                <button>
-                    Games
-                </button>
-                <button>
-                    Apps
-                </button>
-                <button>
-                    Settings
-                </button>
+        </center>
+        <center>
+            <div class="main" style="margin-top: 250px;">
+                <h1 style="font-size: 75px;">
+                    <i>Ethereal</i>
+                </h1>
+                <p id="random-message" style="margin-top: -50px;"><i>"The best unblocker to search and play games."</i></p>
+                <div class="input-container">
+                    <input type="text" placeholder="Enter something...">
+                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
             </div>
-        </div>
-    </center>
-    <center>
-        <div class="main" style="margin-top: 250px;">
-            <h1 style="font-size: 125px;">
-                <i>Ethereal</i>
-            </h1>
-            <p style="margin-top: -75px;"><i>"The best unblocker to search and play games."</i></p>
-        </div>
-    </center>
+            <div class="games"></div>
+        </center>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            LOAD(1);
+            const messages = [
+                "The best unblocker to search and play games.",
+                "Experience ultimate freedom with Ethereal.",
+                "Unlock the web with Ethereal.",
+                "Your gateway to unrestricted browsing.",
+                "Discover a new world with Ethereal."
+            ];
+
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            document.getElementById('random-message').innerText = `"${randomMessage}"`;
+        });
+
+        LOAD = ((a) => {
+            if (a == 1) {
+                document.querySelector("#load-div").style.opacity == 0;
+                document.querySelector("#load-div").style.transition == "0.25s";
+                setTimeout(() => {
+                    document.querySelector("#load-div").style.opacity == 1;
+                }, 250);
+            }
+        })
+    </script>
 </body>
 
 </html>

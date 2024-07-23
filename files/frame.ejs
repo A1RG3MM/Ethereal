@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethereal</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        iframe,
+        #flash-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="/js/frame.js"></script>
+    <script src="/uv/uv.bundle.js"></script>
+    <script src="/uv/uv.config.js"></script>
+    <script>
+        // code for if we need to iframe stuff - permant proxy links, etc
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            if (type !== "local" && type !== "proxy" && type !== "flash") {
+                alert("Error: Invalid type specified.");
+                return;
+            }
+            const type = urlParams.get("type");
+            const url = atob(urlParams.get("url"));
+            if (type === "proxy") { //proxy type
+                const iframe = document.createElement('iframe');
+                iframe.src = getUrl(url);
+                document.body.appendChild(iframe);
+                if (type === "local") { //local type
+                    const iframe = document.createElement('iframe');
+                    iframe.src = url;
+                    document.body.appendChild(iframe);
+                } else if (type === "flash") { //flash type
+                    const swfUrl = atob(urlParams.get("swf"));
+                    const container = document.createElement('div');
+                    container.id = "flash-container";
+                    document.body.appendChild(container);
+                    // ruffle stuff
+                    const script = document.createElement('script');
+                    script.src = "/js/Ruffle";
+                    script.onload = function () {
+                        const ruffle = window.RufflePlayer.newest();
+                        const player = ruffle.createPlayer();
+                        container.appendChild(player);
+                        player.load(swfUrl);
+                    };
+                    document.body.appendChild(script);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

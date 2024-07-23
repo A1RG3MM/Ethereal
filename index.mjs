@@ -18,6 +18,14 @@ app.get('/', (req, res) => {
     res.render("index");
 });
 
+app.get('/gm', (req, res) => {
+    res.render("games");
+});
+
+app.get('/textbook', (req, res) => {
+    res.render("proxy");
+});
+
 app.use((req, res) => {
     res.statusCode = 404;
     res.render("404");
