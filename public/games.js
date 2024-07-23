@@ -79,6 +79,54 @@ let games = [
         "src": "./game-files/flash-files/btd3.swf", 
         "image": "./game-files/img/btd3.png"
     },
+    {
+        "name": "Papas Burgeria",
+        "type": "flash",
+        "src": "./game-files/flash-files/papaburger.swf", 
+        "image": "./game-files/img/papaburger.png"
+    },
+    {
+        "name": "Papas Cupcakeria",
+        "type": "flash",
+        "src": "./game-files/flash-files/papacupcake.swf",
+        "image": "./game-files/img/papacupcake.png"
+    },
+    {
+        "name": "Papas Freezeria",
+        "type": "flash",
+        "src": "./game-files/flash-files/papafreeze.swf",
+        "image": "./game-files/img/papafreeze.png"
+    },
+    {
+        "name": "Papas Hot Doggeria",
+        "type": "flash",
+        "src": "./game-files/flash-files/papahotdog.swf",
+        "image": "./game-files/img/papahotdog.png"
+    },
+    {
+        "name": "Papas Pancakeria",
+        "type": "flash",
+        "src": "./game-files/flash-files/papapancake.swf", 
+        "image": "./game-files/img/papapancake.png"
+    },
+    {
+        "name": "Papas Pizzaeria",
+        "type": "flash",
+        "src": "./game-files/flash-files/papapizza.swf",
+        "image": "./game-files/img/papapizza.png"
+    },
+    {
+        "name": "Papas Taco Mia",
+        "type": "flash",
+        "src": "./game-files/flash-files/papataco.swf",
+        "image": "./game-files/img/papataco.png"
+    },
+    {
+        "name": "Papas Wingeria",
+        "type": "flash",
+        "src": "./game-files/flash-files/papawing.swf", 
+        "image": "./game-files/img/papawing.png"
+    },
 
 
 ]
