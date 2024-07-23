@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethereal | Home</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+        :root {
+            --bg-color: #050505;
+        }
+
+        * {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #FFF;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: -5px;
+            left: 0;
+            right: 0;
+            width: 100%;
+            background-color: #050505b8;
+        }
+
+        .nav-left {
+            margin-left: 25px;
+            margin-right: auto;
+        }
+
+        .nav-right {
+            margin-left: auto;
+            margin-right: 25px;
+        }
+
+        .nav-bar button {
+            background-color: transparent;
+            border: 2px solid #1c1c1c;
+            color: #FFF;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 2.5px;
+            transition: 0.25s ease;
+        }
+
+        .nav-bar button:hover {
+            transform: scale(1.1);
+            background-color: #1c1c1c;
+            cursor: pointer;
+        }
+
+        .nav-bar button:active {
+            background-color: #FFF;
+            border: 2px solid #FFF;
+            color: #000;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0.4rem;
+            height: 0.5rem;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+            width: 0.4rem;
+            height: 0.5rem;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #101010;
+            border-radius: 5px;
+            width: 0.4rem;
+            height: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <div class="nav-bar">
+            <div class="nav-left">
+                <h1><i>Ethereal</i></h1>
+            </div>
+            <div class="nav-right">
+                <button>
+                    Home
+                </button>
+                <button>
+                    Games
+                </button>
+                <button>
+                    Apps
+                </button>
+                <button>
+                    Settings
+                </button>
+            </div>
+        </div>
+    </center>
+    <center>
+        <div class="main" style="margin-top: 250px;">
+            <h1 style="font-size: 125px;">
+                <i>Ethereal</i>
+            </h1>
+            <p style="margin-top: -75px;"><i>"The best unblocker to search and play games."</i></p>
+        </div>
+    </center>
+</body>
+
+</html>
