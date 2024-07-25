@@ -278,7 +278,6 @@
             </div>
         </div>
         <div class="user-input-div">
-            <!-- Change input to textarea -->
             <textarea id="userInput" placeholder="Ask something..."></textarea>
         </div>
     </div>
@@ -289,23 +288,23 @@
         const textarea = document.getElementById('userInput');
 
         function autoResizeTextarea() {
-            const maxHeight = 90; // Maximum height in pixels (for about 10 lines)
-            textarea.style.height = '2.25em'; // Reset the height
-            const newHeight = textarea.scrollHeight; // Calculate the new height
+            const maxHeight = 90;
+            textarea.style.height = '2.25em';
+            const newHeight = textarea.scrollHeight;
 
             if (newHeight > maxHeight) {
                 textarea.style.height = maxHeight + 'px';
-                textarea.style.overflowY = 'scroll'; // Enable scrolling if content exceeds max height
+                textarea.style.overflowY = 'scroll';
             } else {
                 textarea.style.height = newHeight + 'px';
-                textarea.style.overflowY = 'hidden'; // Hide scrollbar if within max height
+                textarea.style.overflowY = 'hidden';
             }
         }
 
-        // Trigger resizing on input
+
         textarea.addEventListener('input', autoResizeTextarea);
 
-        // Initial resize to fit content
+
         autoResizeTextarea();
     });
 </script>
