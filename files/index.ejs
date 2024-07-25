@@ -6,11 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ethereal | Home</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <meta name="description"
+        content="Immerse yourself in the world of coding with Ethereal, your free online learning platform.">
+    <meta name="keywords"
+        content="HTML, CSS, JavaScript, web development, programming, coding tutorials, online learning, ethereal">
+    <meta name="author" content="Ethereal Education">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
         :root {
             --bg-color: #050505;
+
+            --normal: #090909;
+            --normal_outline: #1f1f1f;
+            --error_red: #cb2222;
+            --error_red_outline: #e68787;
+
+            --warning_yellow: #bcbc17;
+            --warning_yellow_outline: #717222;
         }
 
         * {
@@ -20,6 +34,27 @@
         body {
             background-color: var(--bg-color);
             color: #FFF;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        #load-div {
+            visibility: hidden;
+            opacity: 0;
+            margin-bottom: 15em;
+        }
+
+        .main,
+        .games,
+        .apps,
+        .settings {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .games {
+            margin-top: -15em;
         }
 
         .nav-bar {
@@ -71,7 +106,7 @@
             align-items: center;
             justify-content: center;
             margin-top: 20px;
-            width: 100%; 
+            width: 100%;
         }
 
         .input-container input {
@@ -81,8 +116,14 @@
             background-color: #101010;
             color: #FFF;
             outline: none;
-            flex: 1; 
-            max-width: 300px; 
+            flex: 1;
+            max-width: 25vw;
+            text-align: center;
+            transition: 0.25s ease;
+        }
+
+        .input-container input:focus {
+            background-color: #151515;
         }
 
         .input-container button {
@@ -93,9 +134,8 @@
             background-color: #1c1c1c;
             color: #FFF;
             cursor: pointer;
-            transition: 0.25s ease;
+            transition: background-color 0.25s ease, color 0.25s ease, border 0.25s ease;
         }
-
 
         .input-container button:hover {
             background-color: #FFF;
@@ -126,10 +166,288 @@
             width: 0.4rem;
             height: 0.5rem;
         }
+
+        #proxy-load {
+            position: fixed;
+            top: 35%;
+            left: 50%;
+            transform: translateX(-50%);
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.25s ease-in-out;
+        }
+
+        #loading-bar-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150%;
+            height: 100px;
+            background-color: transparent;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        #loading-bar {
+            width: 10%;
+            height: 5px;
+            background-color: #FFF;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            border-radius: 15px;
+        }
+
+        @keyframes loading-bar {
+            0% {
+                width: 75%;
+                left: -100%;
+            }
+
+            100% {
+                width: 75%;
+                left: 100%;
+            }
+        }
+
+        .shortcuts {
+            display: flex;
+            justify-content: center;
+            width: 19vw;
+            margin-top: 5px;
+        }
+
+        .shortcuts button {
+            background-color: transparent;
+            border: 2px solid #1c1c1c;
+            padding: 7.5px;
+            color: #FFF;
+            margin: 5px;
+            width: 2.5em;
+            border-radius: 5px;
+            transition: 0.25s ease-in-out;
+            font-size: 15px;
+        }
+
+        .shortcuts button:hover {
+            transform: scale(1.1);
+            background-color: #1c1c1c;
+            cursor: pointer;
+        }
+
+        .shortcuts button:active {
+            transform: scale(1.1);
+            background-color: #FFF;
+            color: #000;
+            border: 2px solid #FFF;
+            cursor: pointer;
+        }
+
+        .main-curtain {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .curtain {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #000000ab;
+            transition: 0.25s ease;
+        }
+
+        .curtain .curtain-card {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #070707;
+            width: 25em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #101010;
+            border-radius: 5px;
+            flex-direction: column;
+            height: auto;
+        }
+
+        .curtain-card input {
+            margin: 5px;
+            padding: 7px;
+            background-color: transparent;
+            border: none;
+            border-bottom: 2px solid #454545;
+            color: #FFF;
+            text-align: center;
+            width: 20em;
+            transition: 0.25s ease;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus,
+        button:focus {
+            outline: none;
+        }
+
+        .curtain-card input:focus {
+            border-bottom: 2px solid #FFF;
+        }
+
+        .curtain-card button {
+            padding: 5px;
+            background-color: transparent;
+            border: 2px solid #1c1c1c;
+            color: #FFF;
+            border-radius: 5px;
+            margin: 2.5px;
+            margin-bottom: 15px;
+            transition: 0.25s ease;
+        }
+
+        .curtain-card button:hover {
+            background-color: #1c1c1c;
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+
+        .curtain-card button:active {
+            background-color: #FFF;
+            color: #000;
+            border: 2px solid #FFF;
+        }
+
+        .curtain-card button:nth-child(3):hover {
+            background-color: crimson;
+            color: #FFF;
+            border: 2px solid crimson;
+        }
+
+        .curtain-card button:nth-child(3):active {
+            background-color: rgb(128, 16, 38);
+            color: #888888;
+            border: 2px solid rgb(128, 16, 38);
+        }
+
+        .shortcuts {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 30%;
+        }
+
+        .shortcuts button {
+            padding: 0;
+            width: 3em;
+            height: 45px;
+        }
+
+        .shortcuts button img {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            border-radius: 2.5px;
+        }
+
+        .notif-div {
+            display: flex;
+            justify-content: center;
+            z-index: 9999999;
+            position: fixed;
+            top: 5px;
+            right: 5px;
+            flex-direction: column;
+        }
+
+        .notification {
+            z-index: 9999999;
+            background-color: #101010;
+            color: #FFF;
+            width: 10em;
+            border-radius: 5px;
+            box-shadow: 0px 5px 5px 0px rgb(0, 0, 0);
+            border: 2px solid #1c1c1c;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.25s;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .notification p {
+            text-align: center;
+            font-size: 0.7em;
+        }
+
+        .games-list {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .game-card {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            background-color: #FFF;
+            width: 10em;
+            border-radius: 12px;
+            margin: 7px;
+            overflow: hidden;
+            transition: 0.3s ease;
+        }
+
+        .game-card img {
+            width: 100%;
+            border-radius: 5px;
+            padding: 0;
+            display: block;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .game-card:hover img {
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.7);
+        }
+
+        .game-card p {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 10px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-weight: bold;
+            border-radius: 0 0 5px 5px;
+            font-size: 1em;
+        }
+
+        .game-card:hover {
+            cursor: pointer;
+            transform: scale(1.05);
+            border: 1px solid #FFF;
+        }
     </style>
 </head>
 
 <body>
+    <!--noob skid stop looking at the code -->
+    <div class="notif-div">
+    </div>
     <div id="load-div">
         <center>
             <div class="nav-bar">
@@ -137,38 +455,200 @@
                     <h1><i>Ethereal</i></h1>
                 </div>
                 <div class="nav-right">
-                    <button>
-                        Home
-                    </button>
-                    <button onclick="window.location.href = '/games'">
-                        Games
-                    </button>
-                    <button>
-                        Apps
-                    </button>
-                    <button>
-                        Settings
-                    </button>
+                    <span id="clock" style="margin-right: 15px; background-color: #1c1c1c; padding: 7px; border-radius: 5px;">12:00:00 AM</span>
+                    <button onclick="switchPage('home');"><i class="fa-solid fa-house"></i> Home</button>
+                    <button onclick="switchPage('games');">Games</button>
+                    <button onclick="switchPage('games');">Apps</button>
+                    <button onclick="switchPage('AI');">AI</button>
+                    <button onclick="switchPage('games');">Settings</button>
                 </div>
             </div>
         </center>
         <center>
             <div class="main" style="margin-top: 250px;">
-                <h1 style="font-size: 75px;">
-                    <i>Ethereal</i>
-                </h1>
-                <p id="random-message" style="margin-top: -50px;"><i>"The best unblocker to search and play games."</i></p>
-                <div class="input-container">
-                    <input type="text" placeholder="Enter something...">
-                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                <h1 style="font-size: 75px;"><i>Ethereal</i></h1>
+                <p id="random-message" style="margin-top: -50px;"><i>"The best unblocker to search and play games."</i>
+                </p>
+                <form class="input-container" id="searchforma">
+                    <input type="text" id="searchContent" placeholder="Search or type a URL...">
+                    <button id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <hr style="width: 20vw; color: #454545; margin-top: 13px; transition: 0.25s ease;">
+                <div class="shortcuts">
                 </div>
             </div>
-            <div class="games"></div>
+            <div class="games">
+                <div class="games-list">
+                </div>
+            </div>
         </center>
     </div>
+    <div class="curtain main-curtain">
+        <div class="curtain-card" id="shortcuts-menu" style="display: none;">
+            <h2>
+                Add new shortcut...
+            </h2>
+            <input placeholder="Shortcut name..." id="shortcut-name" />
+            <input placeholder="Your URL..." id="shortcut-url" />
+            <input style="margin-bottom: 25px;" placeholder="Image URL..." id="shortcut-img" />
+            <div class="buttons">
+                <button onclick="addShortcut()">
+                    Add shortcut
+                </button>
+                <button>
+                    Edit a shortcut
+                </button>
+                <button onclick="shortcutmenu('false')">
+                    Cancel Changes
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="proxy-load">
+        <h1>
+            Initializing
+        </h1>
+        <div id="loading-bar-container">
+            <div id="loading-bar"></div>
+        </div>
+    </div>
     <script>
+        function shortcutmenu(a) {
+            let mainCurtain = document.querySelector(".main-curtain");
+            let shortcutsMenu = document.getElementById("shortcuts-menu");
+            if (a == "true") {
+                mainCurtain.style.visibility = "visible";
+                mainCurtain.style.opacity = 1;
+                shortcutsMenu.style.display = "";
+            } else if (a == "false") {
+                mainCurtain.style.visibility = "hidden";
+                mainCurtain.style.opacity = 0;
+                setTimeout(() => {
+                    shortcutsMenu.style.display = "none";
+                }, 300);
+            } else {
+                console.error("Error: Invalid use of bool, or no bool was given. [Function: shortcutmenu()]")
+            }
+        }
+
+        function addShortcut() {
+            let shortcutsJSON = JSON.parse(localStorage.getItem("shortcutsJSON")) || [];
+            let newShortcut = {
+                name: document.querySelector("#shortcut-name").value,
+                img: document.querySelector("#shortcut-name").value,
+                url: document.querySelector("#shortcut-url").value
+            }
+
+            shortcutsJSON.push(newShortcut);
+            localStorage.setItem("shortcutsJSON", JSON.stringify(shortcutsJSON));
+
+            let button = document.createElement("button");
+            button.setAttribute("onclick", `NavigateToProxy("${newShortcut.url}")`)
+            button.setAttribute("title", newShortcut.name);
+            let img = document.createElement("img")
+            img.src = newShortcut.img;
+            button.appendChild(img)
+            document.querySelector(".shortcuts").appendChild(button);
+
+            document.querySelector(".shortcuts").removeChild(document.getElementById("removeShortcut"));
+            let button2 = document.createElement("button");
+            button2.setAttribute("onclick", "shortcutmenu('true')")
+            button2.innerHTML = `<i class="fa-solid fa-plus"></i>`;
+            button2.setAttribute("id", "removeShortcut");
+            document.querySelector(".shortcuts").appendChild(button2);
+            shortcutmenu("false");
+        }
+
+        window.onload = () => {
+            let shortcutsJSON = JSON.parse(localStorage.getItem("shortcutsJSON")) || [];
+            shortcutsJSON.forEach(shortcut => {
+                let button = document.createElement("button");
+                button.setAttribute("onclick", `NavigateToProxy("${shortcut.url}")`)
+                button.setAttribute("title", shortcut.name);
+                let img = document.createElement("img")
+                img.src = shortcut.img;
+                button.appendChild(img)
+                document.querySelector(".shortcuts").appendChild(button);
+            });
+            let button = document.createElement("button");
+            button.setAttribute("onclick", "shortcutmenu('true')")
+            button.innerHTML = `<i class="fa-solid fa-plus"></i>`;
+            button.setAttribute("id", "removeShortcut");
+            document.querySelector(".shortcuts").appendChild(button);
+        }
+
+        notify = ((type, content) => {
+            let notification = document.createElement("div");
+            notification.className = "notification";
+            let audio = document.createElement("audio");
+            let audio_source = document.createElement("source");
+            audio_source.setAttribute("type", "audio/mpeg");
+            if (type == "warn") {
+                notification.style.backgroundColor = "var(--warning_yellow)";
+                notification.style.border = "2px solid var(--warning_yellow_outline)";
+                audio_source.src = "./audio/error.mp3";
+            } else if (type == "error") {
+                notification.style.backgroundColor = "var(--error_red)";
+                notification.style.border = "2px solid var(--error_red_outline)";
+                audio_source.src = "./audio/error.mp3";
+            } else if (type == "normal") {
+                notification.style.backgroundColor = "var(--normal)";
+                notification.style.border = "2px solid var(--normal_outline)";
+                audio_source.src = "./audio/notification.mp3";
+            }
+            audio.appendChild(audio_source);
+            notification.appendChild(audio);
+            let notifContent = document.createElement("p");
+            notifContent.innerHTML = content;
+            notification.appendChild(notifContent)
+            document.querySelector(".notif-div").appendChild(notification);
+            notification.style.transition = "0.25s ease";
+            notification.style.visibility = "visible";
+            setTimeout(() => {
+                notification.style.opacity = "1";
+                audio.play();
+                setTimeout(() => {
+                    notification.style.opacity = "0";
+                    setTimeout(() => {
+                        notification.style.visibility = "hidden";
+                        document.querySelector(".notif-div").removeChild(notification);
+                    }, 250);
+                }, 2000);
+            }, 1);
+        })
+    </script>
+    <script src="./js/games.js"></script>
+    <script src="/js/frame.js"></script>
+    <script src="/uv/uv.bundle.js"></script>
+    <script src="/uv/uv.config.js"></script>
+    <script>
+        switchPage = ((page) => {
+            let main = document.querySelector(".main");
+            let games = document.querySelector(".games");
+
+            main.style.transition = "0.25s ease";
+            games.style.transition = "0.25s ease";
+            main.style.opacity = 0;
+            games.style.opacity = 0;
+
+            if (page == "home") {
+                main.style.visibility = "visible";
+                main.style.opacity = 1;
+
+                games.style.visibility = "hidden";
+                localStorage.setItem("currentPage", "home");
+            } else if (page == "games") {
+                games.style.visibility = "visible";
+                games.style.opacity = 1;
+
+                main.style.visibility = "hidden";
+                localStorage.setItem("currentPage", "games");
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             LOAD(1);
+            switchPage(localStorage.getItem("currentPage") || "home");
             const messages = [
                 "The best unblocker to search and play games.",
                 "Experience ultimate freedom with Ethereal.",
@@ -179,18 +659,41 @@
 
             const randomMessage = messages[Math.floor(Math.random() * messages.length)];
             document.getElementById('random-message').innerText = `"${randomMessage}"`;
+            document.getElementById('searchforma').addEventListener('submit', (e) => {
+                e.preventDefault();
+                NavigateToProxy(document.getElementById("searchContent").value);
+            });
         });
 
-        LOAD = ((a) => {
+        function NavigateToProxy(content) {
+            const loadingBar = document.getElementById('loading-bar');
+            document.getElementById("proxy-load").style.transition = "0.25s ease-in-out";
+            document.getElementById("load-div").style.transition = "0.25s ease-in-out";
+            document.getElementById("load-div").style.opacity = 0;
+            document.getElementById("proxy-load").style.visibility = "visible";
+            document.getElementById("proxy-load").style.opacity = "1";
+            loadingBar.style.width = 0;
+            loadingBar.style.animation = 'loading-bar 2s linear infinite';
+            setTimeout(() => {
+                localStorage.setItem("URL", content)
+                location.replace("/textbook");
+            }, 5000);
+        }
+
+        function LOAD(a) {
             if (a == 1) {
-                document.querySelector("#load-div").style.opacity == 0;
-                document.querySelector("#load-div").style.transition == "0.25s";
+                document.querySelector("#load-div").style.visibility = "hidden";
+                document.querySelector("#load-div").style.opacity = 0;
+                document.querySelector("#load-div").style.transition = "0.75s";
                 setTimeout(() => {
-                    document.querySelector("#load-div").style.opacity == 1;
+                    document.querySelector("#load-div").style.visibility = "visible";
+                    document.querySelector("#load-div").style.opacity = 1;
                 }, 250);
             }
-        })
+        }
+
     </script>
+    <script src="./js/clock.js"></script>
 </body>
 
 </html>

@@ -129,6 +129,7 @@
         .game-card img {
             border-radius: 10px;
             width: 100%;
+            height: 0;
         }
 
         .game-card:hover {
@@ -167,6 +168,7 @@
                     <button>Home</button>
                     <button>Games</button>
                     <button>Apps</button>
+                    <button>AI</button>
                     <button>Settings</button>
                 </div>
             </div>
@@ -175,7 +177,10 @@
             <div class="games" id="games"></div>
         </center>
     </div>
-    <script src="/games.js"></script>
+    <form class="input-container" id="searchGam">
+        <input type="text" placeholder="Search for a game...">
+    </form>
+    
 </body>
 
 </html>
