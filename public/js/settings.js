@@ -1,5 +1,5 @@
-aboutBlank = (() => {
-let win = window.open();
+const aboutBlank = () => {
+  let win = window.open();
   let url = window.location.href;
   let iframe = win.document.createElement("iframe");
   let faviconLink = win.document.createElement("link");
@@ -16,4 +16,4 @@ let win = window.open();
   iframe.style.overflow = "hidden";
   iframe.style.backgroundColor = "#000";
   iframe.src = url;
-});
+};

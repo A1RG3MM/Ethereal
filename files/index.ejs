@@ -11,7 +11,13 @@
     <meta name="keywords"
         content="HTML, CSS, JavaScript, web development, programming, coding tutorials, online learning, ethereal">
     <meta name="author" content="Ethereal Education">
-
+    <script src="/baremux/index.js" defer></script>
+    <script src="/epoxy/index.js" defer></script>
+    <script src="/uv.bundle.js" defer></script>
+    <script src="/uv.config.js" defer></script>
+    <script src="./js/proxy-registeration/register-sw.js" defer></script>
+    <script src="./js/proxy-registeration/search.js" defer></script>
+    <script type="application/javascript" src="./js/proxy-registeration/proxy-backend.js" defer></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -445,7 +451,6 @@
 </head>
 
 <body>
-    <!--noob skid stop looking at the code -->
     <div class="notif-div">
     </div>
     <div id="load-div">
@@ -512,6 +517,9 @@
             <div id="loading-bar"></div>
         </div>
     </div>
+    <script src="./js/games.js"></script>
+    <script src="./js/frame.js"></script>
+    <script src="./js/clock.js"></script>
     <script>
         function shortcutmenu(a) {
             let mainCurtain = document.querySelector(".main-curtain");
@@ -617,10 +625,6 @@
             }, 1);
         })
     </script>
-    <script src="./js/games.js"></script>
-    <script src="/js/frame.js"></script>
-    <script src="/uv/uv.bundle.js"></script>
-    <script src="/uv/uv.config.js"></script>
     <script>
         switchPage = ((page) => {
             let main = document.querySelector(".main");
@@ -693,7 +697,6 @@
         }
 
     </script>
-    <script src="./js/clock.js"></script>
 </body>
 
 </html>
