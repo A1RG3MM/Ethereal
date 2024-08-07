@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ethereal | Home</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css" rel="stylesheet">
     <meta name="description"
         content="Immerse yourself in the world of coding with Ethereal, your free online learning platform.">
     <meta name="keywords"
         content="HTML, CSS, JavaScript, web development, programming, coding tutorials, online learning, ethereal">
     <meta name="author" content="Ethereal Education">
+
+    <!--<script data-wisp="wss://wisp.mercurywork.shop/" src="./chemical.js"></script>-->
     <script src="/baremux/index.js" defer></script>
     <script src="/epoxy/index.js" defer></script>
     <script src="/uv.bundle.js" defer></script>
@@ -18,6 +20,9 @@
     <script src="./js/proxy-registeration/register-sw.js" defer></script>
     <script src="./js/proxy-registeration/search.js" defer></script>
     <script type="application/javascript" src="./js/proxy-registeration/proxy-backend.js" defer></script>
+    
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -43,6 +48,7 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            max-height: 100vh;
         }
 
         #load-div {
@@ -57,6 +63,11 @@
         .settings {
             visibility: hidden;
             opacity: 0;
+        }
+
+        .games,
+        .apps {
+            width: 100vw;
         }
 
         .games {
@@ -87,12 +98,13 @@
 
         .nav-bar button {
             background-color: transparent;
-            border: 2px solid #1c1c1c;
+            border: none;
             color: #FFF;
             padding: 10px;
             border-radius: 5px;
-            margin: 2.5px;
+            margin: 5px;
             transition: 0.25s ease;
+            width: 7.5em;
         }
 
         .nav-bar button:hover {
@@ -144,14 +156,13 @@
         }
 
         .input-container button:hover {
-            background-color: #FFF;
-            color: #000;
-            border: 2px solid #FFF;
+            background-color: #555555;
+            border: 2px solid #555555;
         }
 
         .input-container button:active {
-            background-color: #050505;
-            color: #FFF;
+            background-color: #FFF;
+            color: #000;
             border: 2px solid #FFF;
         }
 
@@ -459,13 +470,14 @@
                 <div class="nav-left">
                     <h1><i>Ethereal</i></h1>
                 </div>
+                <button onclick="switchPage('home');"><i class="fa-solid fa-house"></i> | Home</button>
+                <button onclick="switchPage('games');"><i class="fa-solid fa-gamepad"></i> | Games</button>
+                <button onclick="switchPage('apps');"><i class="fa-solid fa-grid"></i> | Apps</button>
+                <button onclick="switchPage('AI');"><i class="fa-solid fa-robot"></i> | A.I.</button>
+                <button onclick="switchPage('settings');"><i class="fa-solid fa-gear"></i> | Settings</button>
                 <div class="nav-right">
-                    <span id="clock" style="margin-right: 15px; background-color: #1c1c1c; padding: 7px; border-radius: 5px;">12:00:00 AM</span>
-                    <button onclick="switchPage('home');"><i class="fa-solid fa-house"></i> Home</button>
-                    <button onclick="switchPage('games');">Games</button>
-                    <button onclick="switchPage('games');">Apps</button>
-                    <button onclick="switchPage('AI');">AI</button>
-                    <button onclick="switchPage('games');">Settings</button>
+                    <span id="clock"
+                        style="background-color: #1c1c1c; padding: 7px; border-radius: 5px;">12:00:00 AM</span>
                 </div>
             </div>
         </center>
@@ -474,11 +486,11 @@
                 <h1 style="font-size: 75px;"><i>Ethereal</i></h1>
                 <p id="random-message" style="margin-top: -50px;"><i>"The best unblocker to search and play games."</i>
                 </p>
-                <form class="input-container" id="searchforma">
+                <form class="input-container" id="index_uv_form">
                     <input type="text" id="searchContent" placeholder="Search or type a URL...">
                     <button id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
-                <hr style="width: 20vw; color: #454545; margin-top: 13px; transition: 0.25s ease;">
+                <hr style="width: 25vw; color: #454545; margin-top: 13px; transition: 0.25s ease;">
                 <div class="shortcuts">
                 </div>
             </div>
@@ -517,8 +529,8 @@
             <div id="loading-bar"></div>
         </div>
     </div>
+
     <script src="./js/games.js"></script>
-    <script src="./js/frame.js"></script>
     <script src="./js/clock.js"></script>
     <script>
         function shortcutmenu(a) {
@@ -626,7 +638,7 @@
         })
     </script>
     <script>
-        switchPage = ((page) => {
+        const switchPage = (page) => {
             let main = document.querySelector(".main");
             let games = document.querySelector(".games");
 
@@ -648,53 +660,69 @@
                 main.style.visibility = "hidden";
                 localStorage.setItem("currentPage", "games");
             }
-        });
+        };
 
         document.addEventListener('DOMContentLoaded', () => {
-            LOAD(1);
+            document.querySelector("#load-div").style.visibility = "hidden";
+            document.querySelector("#load-div").style.opacity = 0;
+            document.querySelector("#load-div").style.transition = "0.75s";
+            setTimeout(() => {
+                document.querySelector("#load-div").style.visibility = "visible";
+                document.querySelector("#load-div").style.opacity = 1;
+            }, 250);
+
             switchPage(localStorage.getItem("currentPage") || "home");
             const messages = [
                 "The best unblocker to search and play games.",
                 "Experience ultimate freedom with Ethereal.",
                 "Unlock the web with Ethereal.",
                 "Your gateway to unrestricted browsing.",
-                "Discover a new world with Ethereal."
+                "Discover a new world with Ethereal.",
+                "Navigate the internet like never before.",
+                "Ethereal: Where your online journey begins.",
+                "Ethereal: Explore without limits.",
+                "Browse the web with bypassed censorship.",
+                "Enjoy seamless access to your favorite sites.",
+                "Step into the world of unbounded browsing.",
+                "Ethereal makes the internet your playground.",
+                "Access what you want, when you want.",
+                "Redefine your browsing experience.",
+                "Break through the barriers of the web.",
+                "Ethereal opens the door to endless possibilities.",
+                "Surf the web without any restrictions.",
+                "Discover new horizons online with Ethereal.",
+                "Your main key to a borderless internet.",
+                "Ethereal: The ultimate tabbed proxy.",
+                "Join our discord! (discord.gg/Ethereal_)",
+                "Xineese is gay btw."
             ];
+            const randomMessageElement = document.getElementById('random-message');
+            randomMessageElement.style.opacity = 0;
+            randomMessageElement.style.transition = "0.25s ease";
+            let previousIndex = -1;
+            const forever = () => {
+                setTimeout(() => {
+                    let randomIndex;
+                    do {
+                        randomIndex = Math.floor(Math.random() * messages.length);
+                    } while (randomIndex === previousIndex);
+                    previousIndex = randomIndex;
+                    const randomMessage = messages[randomIndex];
+                    randomMessageElement.style.opacity = 1;
+                    randomMessageElement.innerText = `"${randomMessage}"`;
 
-            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            document.getElementById('random-message').innerText = `"${randomMessage}"`;
-            document.getElementById('searchforma').addEventListener('submit', (e) => {
+                    setTimeout(() => {
+                        randomMessageElement.style.opacity = 0;
+                        forever();
+                    }, 4500);
+                }, 500);
+            };
+            forever();
+            document.getElementById('index_uv_form').addEventListener('submit', (e) => {
                 e.preventDefault();
                 NavigateToProxy(document.getElementById("searchContent").value);
             });
         });
-
-        function NavigateToProxy(content) {
-            const loadingBar = document.getElementById('loading-bar');
-            document.getElementById("proxy-load").style.transition = "0.25s ease-in-out";
-            document.getElementById("load-div").style.transition = "0.25s ease-in-out";
-            document.getElementById("load-div").style.opacity = 0;
-            document.getElementById("proxy-load").style.visibility = "visible";
-            document.getElementById("proxy-load").style.opacity = "1";
-            loadingBar.style.width = 0;
-            loadingBar.style.animation = 'loading-bar 2s linear infinite';
-            setTimeout(() => {
-                localStorage.setItem("URL", content)
-                location.replace("/textbook");
-            }, 5000);
-        }
-
-        function LOAD(a) {
-            if (a == 1) {
-                document.querySelector("#load-div").style.visibility = "hidden";
-                document.querySelector("#load-div").style.opacity = 0;
-                document.querySelector("#load-div").style.transition = "0.75s";
-                setTimeout(() => {
-                    document.querySelector("#load-div").style.visibility = "visible";
-                    document.querySelector("#load-div").style.opacity = 1;
-                }, 250);
-            }
-        }
 
     </script>
 </body>

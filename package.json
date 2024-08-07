@@ -13,9 +13,12 @@
   "license": "ISC",
   "dependencies": {
     "@tomphttp/bare-server-node": "^2.0.3",
+    "chemicaljs": "^1.6.5",
     "cors": "^2.8.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
     "wisp-server-node": "^1.1.3"
   }
 }
