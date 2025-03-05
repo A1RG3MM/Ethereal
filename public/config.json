@@ -1,0 +1,14 @@
+{
+    "apps": {
+        "chrome": {
+            "name": "Example App",
+            "version": "1.0",
+            "icon": ""
+        },
+        "game": {
+            "name": "test",
+            "version": "2.0",
+            "icon": ""
+        }
+    }
+}

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>EtherealOS</title>
+    <style>
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            z-index: 99999999999999999;
+        }
+
+        .loading-container {
+            width: 600px;
+            height: 10px;
+            background-color: #444;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loading-bar {
+            height: 100%;
+            width: 100%;
+            background: #7f76f3;
+            position: absolute;
+            animation: slideLeftRight 2s infinite ease-in-out;
+            border-radius: 5px;
+        }
+
+        @keyframes slideLeftRight {
+            0% {
+                left: -45%;
+                width: 50%;
+            }
+
+            25% {
+                width: 70%
+            }
+
+            50% {
+                left: 95%;
+                width: 5%;
+            }
+
+            /* Moves to right */
+            75% {
+                width: 70%;
+            }
+
+            100% {
+                left: -45%;
+                width: 50%
+            }
+
+            /* Moves back to left */
+        }
+
+        .loading-circle {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 0, 0, 0.3);
+            border-top: 5px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: auto;
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading">
+        <div class="text-flex" style="filter: blur(10px); opacity: 0;">
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <h1 style="margin-bottom: 15px;">Loading...</h1>
+            <div class="loading-circle" style="margin-right: 10px;"></div>
+            </div>
+            <div class="loading-container">
+                <div class="loading-bar"></div>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center; margin-top: 10px;">
+                <h1 style="margin-left: auto; margin-right: 10px; font-size: 1.25em;">[VERSION: 1.0.0]</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg">
+        <div id="particles-js"></div>
+        <div class="shadow-top"></div>
+
+        <div class="clock">
+            <span id="clock"></span>
+            <span id="date">January 26th, 2025</span>
+        </div>
+
+
+        <div class="bottom">
+            <div class="toolbar info-toolbar">
+                <div style="flex-direction: column; text-align: left;">
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <img src="./assets/_appicons/time.png" alt="">
+                        <div
+                            style="display: flex; justify-content: flex-start; align-items: flex-start; flex-direction: column; width: 15;">
+                            <span style="font-weight: 500; font-size: 1em;" id="small-clock">Ethereal</span>
+                            <span style="font-size: 0.75em;" id="small-date">Beta Testing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="toolbar apps-toolbar" style="display: flex; justify-content: center; align-items: center;">
+                <div class="align-left">
+                    <div class="apps">
+                        <div class="app">
+                            <img src="./assets/_appicons/search.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="align-right">
+                    <div class="apps">
+                        <div class="app">
+                            <img src="./assets/google.png" alt="">
+                        </div>
+                        <div class="app">
+                            <img src="./assets/vsc.png" alt="">
+                        </div>
+                        <div class="app">
+                            <img src="./assets/discord.jpg" alt="">
+                        </div>
+                        <div class="app">
+                            <img src="./assets/_appicons/newapp.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="toolbar widgets-toolbar">
+                <div class="widgets">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-bell">
+                        <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+                        <path
+                            d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-gamepad-2">
+                        <line x1="6" x2="10" y1="11" y2="11" />
+                        <line x1="8" x2="8" y1="9" y2="13" />
+                        <line x1="15" x2="15.01" y1="12" y2="12" />
+                        <line x1="18" x2="18.01" y1="10" y2="10" />
+                        <path
+                            d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-settings">
+                        <path
+                            d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="./js/particles.js"></script>
+    <script src="./js/clock.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,300 @@
+@import url('https://api.fontshare.com/v2/css?f[]=chillax@300,400,500,600,700&display=swap');
+
+* {
+    font-family: 'Chillax', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    cursor: url("../assets/cursor.png"), auto;
+    background-image: url('../assets/bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden;
+    color: #FFF;
+}
+
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.bg {
+    background: linear-gradient(to bottom, #1e1e2fd5, #121212d5);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.clock {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    font-weight: 600;
+    text-align: center;
+    background: linear-gradient(to top left, #241d3bae, #3d3658ae);
+    backdrop-filter: blur(3px);
+    padding: 15px;
+    border-radius: 0.75vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 2.5vw;
+    width: 19vw;
+    height: 13vh;
+}
+
+#date {
+    font-size: 0.5em;
+}
+
+
+
+.bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 1s ease;
+    transform: scale(0.95);
+    filter: blur(10px);
+    opacity: 0;
+}
+
+.toolbar {
+    background: linear-gradient(to top, #241d3bae, #3d3658ae);
+    border: 1px solid #ffffff33;
+    backdrop-filter: blur(3px);
+    border-radius: 0px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-style: outset;
+    border-color: transparent;
+    animation: fadeIn 1s forwards;
+    height: 70px;
+    margin: 0 10px 20px 10px;
+    border-radius: 10px;
+    user-select: none;
+}
+
+.shadow-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(54, 52, 82, 0.7), transparent);
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .toolbar {
+        width: 90%;
+    }
+
+    .app {
+        width: 50px;
+        height: 50px;
+    }
+
+    .app p {
+        font-size: 10px;
+    }
+}
+
+.apps-toolbar {
+    animation: appsToolbarFadeIn 1s forwards;
+}
+
+.info-toolbar img {
+    width: 50px;
+    margin-right: 15px;
+}
+
+@keyframes backgroundFadeIn {
+    from {
+        filter: blur(5px);
+    }
+
+    to {
+        filter: blur(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        filter: blur(10px);
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        filter: blur(0);
+        transform: scale(1);
+    }
+}
+
+@keyframes appsToolbarFadeIn {
+    from {
+        width: 70%;
+        opacity: 0;
+        filter: blur(10px);
+    }
+
+    to {
+        width: 70%;
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+.time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: right;
+    margin: 0;
+    height: 70px;
+    border-radius: 0 10px 10px 0px;
+    transition: 0.25s ease;
+    text-align: right;
+}
+
+.time:hover {
+    background: #413b5fae;
+    cursor: pointer;
+}
+
+.time:active {
+    background-color: #1c1929ae;
+}
+
+.time:active span {
+    color: #acacac;
+}
+
+svg {
+    transition: 0.25s ease;
+}
+
+svg:hover {
+    cursor: pointer;
+}
+
+svg:active {
+    color: #808080;
+    transform: scale(0.9);
+}
+
+.time span {
+    margin-right: 10px;
+    margin-left: 10px;
+    transition: 0.25s ease;
+}
+
+.widgets {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.widgets svg {
+    margin: 10px;
+}
+
+.widgets svg:nth-child(1) {
+    margin-left: 15px;
+}
+
+.apps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.apps-toolbar .align-left,
+.apps-toolbar .align-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.apps-toolbar .align-left {
+    margin-right: auto;
+}
+
+.apps-toolbar .align-right {
+    margin-left: auto;
+    margin-right: -10px;
+}
+
+.apps-toolbar input {
+    background-color: #1c1929ae;
+    border-radius: 100px;
+    border-style: solid;
+    border-width: 1px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-color: #3c4492;
+    color: #FFF;
+    padding: 5px;
+    -webkit-text-stroke: #121212d5;
+    width: 15vw;
+}
+
+.app {
+    background-color: transparent;
+    padding: 5px;
+    width: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.25s ease;
+    margin: 5px;
+}
+
+.app:hover {
+    background-color: #393355ae;
+}
+
+.app img,
+.app svg {
+    width: 40px;
+    margin: 2.5px;
+    border-radius: 5px;
+}
+
+.app:active {
+    background-color: #655e80ae;
+    transform: scale(0.9);
+}
