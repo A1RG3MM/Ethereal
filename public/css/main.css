@@ -45,7 +45,10 @@ body {
     position: absolute;
     top: 20%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+    filter: blur(10px);
+    transition: 0.25s ease;
     font-size: 48px;
     font-weight: 600;
     text-align: center;
@@ -60,13 +63,12 @@ body {
     font-size: 2.5vw;
     width: 19vw;
     height: 13vh;
+    user-select: none;
 }
 
 #date {
     font-size: 0.5em;
 }
-
-
 
 .bottom {
     position: fixed;

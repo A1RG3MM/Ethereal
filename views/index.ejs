@@ -7,6 +7,102 @@
     <link rel="stylesheet" href="./css/main.css">
     <title>EtherealOS</title>
     <style>
+        .window {
+            background: rgba(61, 48, 104, 0.452);
+            backdrop-filter: blur(10px);
+            width: 450px;
+            height: 320px;
+            border-radius: 15px;
+            border: 2px solid rgba(63, 51, 104, 0.9);
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .window-header {
+            background: rgba(95, 80, 160, 0.85);
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0 15px;
+            color: white;
+            font-weight: 500;
+            font-size: 1.1em;
+            cursor: grab;
+            position: relative;
+        }
+
+        .window-header:active {
+            cursor: grabbing;
+        }
+
+        /* macOS-style Window Controls */
+        .window-controls {
+            display: flex;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .window-control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+
+        .close {
+            background: #FF5F57;
+        }
+
+        .minimize {
+            background: #FFBD2E;
+        }
+
+        .maximize {
+            background: #27C93F;
+        }
+
+        .window-control:hover {
+            opacity: 0.8;
+        }
+
+        /* Window Body */
+        .window-body {
+            padding: 15px;
+            color: white;
+            font-size: 1em;
+        }
+
+        /* Draggable Style */
+        .window-close {
+            display: none;
+            /* Removed old close button */
+        }
+
+        .resizable-handle {
+            width: 16px;
+            height: 16px;
+            background-color: rgba(95, 80, 160, 0.85);
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            cursor: se-resize;
+            /* Bottom-right corner resize cursor */
+        }
+
+        .window-body {
+            padding: 15px;
+            color: white;
+            font-size: 1em;
+        }
+
         .loading {
             display: flex;
             justify-content: center;
@@ -23,7 +119,7 @@
         .loading-container {
             width: 600px;
             height: 10px;
-            background-color: #444;
+            background-color: #000;
             border-radius: 5px;
             overflow: hidden;
             position: relative;
@@ -79,18 +175,23 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="loading">
+    <div class="loading" style="display: none;">
         <div class="text-flex" style="filter: blur(10px); opacity: 0;">
             <div style="display: flex; justify-content: center; align-items: center;">
                 <h1 style="margin-bottom: 15px;">Loading...</h1>
-            <div class="loading-circle" style="margin-right: 10px;"></div>
+                <div class="loading-circle" style="margin-right: 10px;"></div>
             </div>
             <div class="loading-container">
                 <div class="loading-bar"></div>
@@ -105,9 +206,33 @@
         <div id="particles-js"></div>
         <div class="shadow-top"></div>
 
-        <div class="clock">
-            <span id="clock"></span>
-            <span id="date">January 26th, 2025</span>
+        <div class="widgets">
+            <div class="widget clock">
+                <span id="clock"></span>
+                <span id="date">January 26th, 2025</span>
+            </div>
+            <div class="widget clock">
+                <span id="clock"></span>
+                <span id="date">January 26th, 2025</span>
+            </div>
+        </div>
+
+        <div class="windows">
+            <div class="window">
+                <div class="window-header" id="window-header">
+                    Welcome | EtherealOS
+                    <div class="window-controls">
+                        <div class="window-control minimize" onclick="minimizeWindow()"></div>
+                        <div class="window-control maximize" onclick="maximizeWindow()"></div>
+                        <div class="window-control close" onclick="closeWindow()"></div>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <p>Welcome to EtherealOS with macOS-inspired window controls!</p>
+                    <p>This is a sleek window that includes macOS-style buttons.</p>
+                </div>
+                <div class="resizable-handle" id="resizable-handle"></div>
+            </div>
         </div>
 
 
@@ -118,7 +243,7 @@
                         <img src="./assets/_appicons/time.png" alt="">
                         <div
                             style="display: flex; justify-content: flex-start; align-items: flex-start; flex-direction: column; width: 15;">
-                            <span style="font-weight: 500; font-size: 1em;" id="small-clock">Ethereal</span>
+                            <span style="font-weight: 500; font-size: 0.9em;" id="small-clock">Ethereal</span>
                             <span style="font-size: 0.75em;" id="small-date">Beta Testing</span>
                         </div>
                     </div>
@@ -147,6 +272,7 @@
                             <img src="./assets/_appicons/newapp.png" alt="">
                         </div>
                     </div>
+
                 </div>
             </div>
             <div class="toolbar widgets-toolbar">
@@ -175,6 +301,14 @@
                             d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
                         <circle cx="12" cy="12" r="3" />
                     </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-layout-grid">
+                        <rect width="7" height="7" x="3" y="3" rx="1" />
+                        <rect width="7" height="7" x="14" y="3" rx="1" />
+                        <rect width="7" height="7" x="14" y="14" rx="1" />
+                        <rect width="7" height="7" x="3" y="14" rx="1" />
+                    </svg>
                 </div>
             </div>
         </div>
@@ -184,6 +318,69 @@
     <script src="./js/particles.js"></script>
     <script src="./js/clock.js"></script>
     <script src="./js/main.js"></script>
+    <script>
+        function closeWindow() {
+            document.querySelector('.window').style.display = 'none';
+        }
+
+        // Minimize Window Function (simulated)
+        function minimizeWindow() {
+            document.querySelector('.window').style.display = 'none';
+            alert('Window Minimized!');
+        }
+
+        function maximizeWindow() {
+            const windowElement = document.querySelector('.window');
+            windowElement.style.borderRadius = '0'
+            windowElement.style.transform = 'none';
+            windowElement.style.width = '100%';
+            windowElement.style.height = '100vh';
+            windowElement.style.top = '0';
+            windowElement.style.left = '0';
+            alert('Window Maximized!');
+        }
+
+        const windowElement = document.querySelector('.window');
+        const header = document.getElementById('window-header');
+
+        let offsetX = 0, offsetY = 0, isDragging = false;
+        header.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - windowElement.offsetLeft;
+            offsetY = e.clientY - windowElement.offsetTop;
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', () => isDragging = false);
+        });
+
+        function onMouseMove(e) {
+            if (isDragging) {
+                windowElement.style.left = `${e.clientX - offsetX}px`;
+                windowElement.style.top = `${e.clientY - offsetY}px`;
+            }
+        }
+
+        const resizableHandle = document.getElementById('resizable-handle');
+        let isResizing = false;
+        let prevWidth = 0;
+        let prevHeight = 0;
+
+        resizableHandle.addEventListener('mousedown', (e) => {
+            isResizing = true;
+            prevWidth = windowElement.offsetWidth;
+            prevHeight = windowElement.offsetHeight;
+            document.addEventListener('mousemove', onMouseResize);
+            document.addEventListener('mouseup', () => isResizing = false);
+        });
+
+        function onMouseResize(e) {
+            if (isResizing) {
+                const newWidth = prevWidth + (e.clientX - windowElement.getBoundingClientRect().right);
+                const newHeight = prevHeight + (e.clientY - windowElement.getBoundingClientRect().bottom);
+                windowElement.style.width = `${newWidth}px`;
+                windowElement.style.height = `${newHeight}px`;
+            }
+        }
+    </script>
 </body>
 
 </html>
